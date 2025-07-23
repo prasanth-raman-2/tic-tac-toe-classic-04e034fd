@@ -1,10 +1,12 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from src.routes import auth
+from src.routes import auth, game
 
-app = FastAPI(title="Tic Tac Toe API",
-             description="Backend API for Tic Tac Toe game",
-             version="1.0.0")
+app = FastAPI(
+    title="Tic Tac Toe API",
+    description="Backend API for Tic Tac Toe game",
+    version="1.0.0"
+)
 
 app.add_middleware(
     CORSMiddleware,
@@ -16,6 +18,7 @@ app.add_middleware(
 
 # Include routers
 app.include_router(auth.router)
+app.include_router(game.router)
 
 @app.get("/")
 def health_check():
